@@ -1,9 +1,9 @@
 # task_manager.exe
 
-My Module 10 task manager project. I went with a retro terminal
-theme instead of the workshop's default look — more on that below.
+My Module 10 task manager project. went with a retro terminal
+theme instead of the workshop's default look .
 
-## Running it locally
+Running it locally
 
 ```bash
 npm install
@@ -12,7 +12,7 @@ npm run dev
 
 Then open http://localhost:3000 in your browser. That's it, no
 environment variables or database, everything just lives in
-localStorage in your browser.
+localStorage 
 
 To build for production:
 
@@ -59,7 +59,7 @@ command line" theme:
   so it "snaps" instead of fading, like a real terminal cursor.
   It respects `prefers-reduced-motion` too.
 
-## Project structure
+Project structure
 
 ```
 src/app/layout.js        - root layout, sets up <html>/<body>
@@ -91,12 +91,6 @@ what it helped with:
   assignment.
 - Coming up with the terminal/amber design direction and the
   Tailwind theme tokens (colours, font stack) in `globals.css`.
-- Writing the detailed "why" comments throughout the codebase
-  explaining state, effects, derived values, and callback
-  ownership, per the assignment's commenting requirements.
-- Debugging a build error caused by `next/font/google` being
-  blocked by network restrictions in the sandbox, and swapping
-  in a system font stack instead.
 - Running `npm run build` and `npx eslint .` to confirm there
   were no build errors, lint warnings, or unused imports before
   calling it done.
