@@ -1,0 +1,75 @@
+/* ══════════════════════════════════════════════════════
+   FILE: globals.css
+   PURPOSE: This file is only supposed to hold the Tailwind
+   import plus my custom design tokens (the assignment says
+   this file should be "Tailwind import only" but Tailwind v4
+   actually wants you to define custom colors/fonts right here
+   using @theme, there's no separate tailwind.config.js anymore
+   in v4 unless you want one, so I'm keeping all my theme
+   variables in this one spot instead of a JS config file).
+   ══════════════════════════════════════════════════════ */
+@import "tailwindcss";
+
+/* ── DESIGN TOKENS ────────────────────────────────────
+   This is my whole color palette for the "retro terminal"
+   theme. I'm using @theme (a Tailwind v4 feature) so that
+   these become real utility classes, e.g. --color-amber
+   turns into bg-amber / text-amber / border-amber for free.
+   I picked an amber-on-near-black look instead of the classic
+   green terminal because amber phosphor monitors were a real
+   thing (like old IBM terminals) and it reads a little warmer
+   than the standard green-on-black cliché. */
+@theme inline {
+  /* Using a system monospace stack instead of a downloaded
+     Google Font - see the note in layout.js for why. ui-monospace
+     picks up the OS's native mono font (e.g. SF Mono on Mac,
+     Consolas on Windows) before falling back further down. */
+  --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Consolas, "Courier New", monospace;
+
+  --color-bg: #0d0f0b;          /* main page background, almost black with a hint of green */
+  --color-panel: #14170f;        /* sidebar + card background, one step lighter than bg */
+  --color-panel-alt: #1a1e13;    /* hover / alternating row background */
+  --color-border: #34392a;       /* all borders in the app use this so lines stay consistent */
+  --color-amber: #ffb454;        /* primary accent - buttons, active filter, focus rings */
+  --color-amber-dim: #a87735;    /* muted version of amber for secondary text/icons */
+  --color-green: #8fd17a;        /* used only for "done" state - keeps done tasks visually distinct */
+  --color-red: #ff6b6b;          /* delete action only, so destructive actions stand out */
+  --color-text: #e7e6dc;         /* main text color, off-white so it's not harsh against black */
+  --color-text-muted: #8b8f7d;   /* secondary text, like counts and placeholders */
+}
+
+/* Setting the base background/text here so I don't have to
+   repeat bg-bg text-text on every single wrapper element. */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* ── SIGNATURE ELEMENT: blinking terminal cursor ──────
+   This is the one animated flourish in the whole app - a
+   little block that blinks like an actual cursor sitting at
+   the end of the page title. Using steps(1) instead of a
+   smooth transition so it "snaps" on/off like a real terminal
+   cursor rather than fading, which looks too soft for the theme. */
+@keyframes blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  animation: blink 1s steps(1) infinite;
+}
+
+/* Respecting reduced-motion preferences: if someone has
+   turned on "reduce motion" at the OS level, stop the cursor
+   from flashing so it isn't uncomfortable for them to look at. */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-blink {
+    animation: none;
+    opacity: 1;
+  }
+}
